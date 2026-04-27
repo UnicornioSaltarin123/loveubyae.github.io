@@ -28,6 +28,7 @@ body{
   position:relative;
   overflow:hidden;
   background:url("Untitled.jpg") center/cover no-repeat;
+  color:white;
 }
 
 /* overlay */
@@ -43,7 +44,7 @@ body{
   );
 }
 
-/* 🕒 */
+/* 🕒 HORA */
 .time-box{
   position:absolute;
   top:6vh;
@@ -54,18 +55,24 @@ body{
   z-index:2;
 }
 
+.time-bg{
+  position:absolute;
+  top:-25px;
+  width:100%;
+  height:160px;
+  background:rgba(0,0,0,0.35);
+}
+
 .time{
   font-size:clamp(70px, 10vw, 95px);
   font-weight:100;
-  color:#fff;
 }
 
 .date{
   font-size:clamp(16px, 2.5vw, 22px);
-  color:#fff;
 }
 
-/* 🔔 */
+/* 🔔 NOTIFICATIONS (igual) */
 .notifications{
   position:absolute;
   top:30vh;
@@ -78,10 +85,8 @@ body{
   align-items:center;
   gap:14px;
   padding:16px;
-
   background:rgba(40,40,40,0.55);
   backdrop-filter:blur(2px);
-
   color:white;
   border-top:1px solid rgba(255,255,255,0.15);
 }
@@ -100,10 +105,8 @@ body{
   transform:translateX(-50%);
   width:92%;
   height:95px;
-
   border-radius:26px;
   background:linear-gradient(#3a3a3a,#000);
-
   display:flex;
   align-items:center;
   padding:10px;
@@ -120,11 +123,35 @@ body{
   align-items:center;
   font-size:34px;
   color:#777;
-
-  position:relative;
   touch-action:none;
-  user-select:none;
   cursor:pointer;
+}
+
+/* ✨ TEXTO CON BRILLO REAL */
+.slider-text{
+  width:100%;
+  text-align:center;
+  font-size:26px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.2) 0%,
+    rgba(255,255,255,0.2) 40%,
+    rgba(255,255,255,0.9) 50%,
+    rgba(255,255,255,0.2) 60%,
+    rgba(255,255,255,0.2) 100%
+  );
+
+  background-size:200% 100%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  animation:shineMove 3.6s linear infinite;
+}
+
+@keyframes shineMove{
+  from{background-position:100% 0;}
+  to{background-position:-100% 0;}
 }
 
 /* 📱 MOBILE */
@@ -146,6 +173,7 @@ body{
 <div class="phone">
 
   <div class="time-box">
+    <div class="time-bg"></div>
     <div class="time" id="time"></div>
     <div class="date" id="date"></div>
   </div>
@@ -180,9 +208,7 @@ body{
 
   <div class="slider">
     <div class="slider-btn">→</div>
-    <div style="width:100%; text-align:center; color:rgba(255,255,255,0.4); font-size:26px;">
-      slide to unlock
-    </div>
+    <div class="slider-text">slide to unlock</div>
   </div>
 
 </div>
@@ -200,51 +226,37 @@ function updateTime(){
 setInterval(updateTime,1000);
 updateTime();
 
-/* 🔥 SLIDE FUNCIONAL REAL */
-const btn = document.querySelector(".slider-btn");
-const slider = document.querySelector(".slider");
+/* 🔥 SLIDE FUNCIONAL */
+const btn=document.querySelector(".slider-btn");
+const slider=document.querySelector(".slider");
 
-let dragging = false;
-let startX = 0;
+let dragging=false,startX=0;
 
-btn.addEventListener("pointerdown", e=>{
-  dragging = true;
-  startX = e.clientX;
+btn.addEventListener("pointerdown",e=>{
+  dragging=true;
+  startX=e.clientX;
 });
 
-window.addEventListener("pointermove", e=>{
-  if(!dragging) return;
+window.addEventListener("pointermove",e=>{
+  if(!dragging)return;
 
-  let dx = e.clientX - startX;
-  let max = slider.offsetWidth - btn.offsetWidth - 20;
+  let dx=e.clientX-startX;
+  let max=slider.offsetWidth-btn.offsetWidth-20;
 
-  if(dx < 0) dx = 0;
-  if(dx > max) dx = max;
+  if(dx<0)dx=0;
+  if(dx>max)dx=max;
 
-  btn.style.transform = `translateX(${dx}px)`;
+  btn.style.transform=`translateX(${dx}px)`;
 
-  if(dx >= max){
-    unlock();
+  if(dx>=max){
+    window.location.href="home.html";
   }
 });
 
-window.addEventListener("pointerup", ()=>{
-  if(!dragging) return;
-  dragging = false;
-  btn.style.transform = "translateX(0)";
+window.addEventListener("pointerup",()=>{
+  dragging=false;
+  btn.style.transform="translateX(0)";
 });
-
-function unlock(){
-  dragging = false;
-
-  const phone = document.querySelector(".phone");
-  phone.style.transition = "0.5s";
-  phone.style.opacity = "0";
-
-  setTimeout(()=>{
-    window.location.href = "home.html";
-  },500);
-}
 </script>
 
 </body>
