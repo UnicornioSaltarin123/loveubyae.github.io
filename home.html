@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 
 <title>loveubyae</title>
 
@@ -14,184 +14,161 @@ body{
   background:url("Untitled homexcreen.jpg") center/cover no-repeat;
   font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;
   overflow:hidden;
+  display:flex;
+  justify-content:center;
   color:white;
 }
 
-/* STATUS BAR */
-.status{
-  position:absolute;
-  top:0;
-  width:100%;
-  height:40px;
-  background:linear-gradient(to bottom, #000, #222);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 12px;
-  font-size:12px;
-}
-
-/* GRID */
-.home{
-  position:absolute;
-  top:90px;
-  width:100%;
-  padding:20px;
-
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:25px;
+.phone{
+  width:390px;
+  height:100%;
+  position:relative;
 }
 
 /* APP */
 .app{
+  position:absolute;
+  width:70px;
   text-align:center;
-  font-size:12px;
   user-select:none;
 }
 
 /* ICON */
 .icon{
-  width:70px;
-  height:70px;
-  border-radius:18px;
+  width:60px;
+  height:60px;
+  border-radius:14px;
   background-size:cover;
   background-position:center;
-  margin:0 auto 6px;
-  box-shadow:
-    0 6px 12px rgba(0,0,0,0.5),
-    inset 0 1px 1px rgba(255,255,255,0.4);
+  margin:auto;
 
-  transition:transform .15s cubic-bezier(.2,1.3,.4,1),
-             filter .1s;
+  box-shadow:
+    0 4px 8px rgba(0,0,0,0.6),
+    inset 0 1px 1px rgba(255,255,255,0.3);
+
+  transition:all .15s ease;
   position:relative;
 }
 
-/* REFLECTION (iOS 6 style) */
-.icon::after{
-  content:"";
+/* BADGE */
+.badge{
   position:absolute;
-  bottom:-10px;
-  left:0;
-  width:100%;
-  height:40%;
-  background:inherit;
-  opacity:0.15;
-  filter:blur(4px);
-  transform:scaleY(-1);
+  top:-6px;
+  right:-6px;
+  background:#ff3b30;
+  color:white;
+  font-size:10px;
+  padding:2px 5px;
+  border-radius:10px;
+  border:1px solid rgba(0,0,0,0.3);
 }
 
-/* TAP ANIMATION */
+/* LABEL */
+.label{
+  font-size:11px;
+  margin-top:4px;
+  text-shadow:0 1px 2px black;
+}
+
+/* TAP */
 .app:active .icon{
   transform:scale(0.8);
-  filter:brightness(0.7);
+  filter:brightness(0.6);
 }
 
-/* DOCK */
-.dock{
-  position:absolute;
-  bottom:calc(10px + env(safe-area-inset-bottom));
-  left:50%;
-  transform:translateX(-50%);
-  width:92%;
-  height:90px;
-
-  background:rgba(255,255,255,0.15);
-  backdrop-filter:blur(25px);
-  border-radius:30px;
-
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-
-  box-shadow:
-    inset 0 1px 1px rgba(255,255,255,0.4),
-    0 10px 30px rgba(0,0,0,0.4);
+/* WIGGLE */
+.wiggle{
+  animation:wiggle .2s infinite alternate;
 }
 
-.dock .icon{
-  width:65px;
-  height:65px;
+@keyframes wiggle{
+  from{transform:rotate(-2deg);}
+  to{transform:rotate(2deg);}
 }
 
-/* OPEN ANIMATION */
-.opening{
+/* OPEN */
+.open{
   position:fixed;
   inset:0;
   background:black;
   z-index:999;
-  animation:openApp .5s forwards;
+  animation:zoom .35s forwards;
 }
 
-@keyframes openApp{
-  0%{
-    transform:scale(0.3);
-    opacity:0;
-  }
-  60%{
-    transform:scale(1.05);
-    opacity:1;
-  }
-  100%{
-    transform:scale(1);
-  }
+@keyframes zoom{
+  0%{transform:scale(.3);opacity:0;}
+  100%{transform:scale(1);opacity:1;}
 }
 </style>
 </head>
 
 <body>
 
-<div class="status">
-  <div>#diario 📶</div>
-  <div>4:32 PM 🔒</div>
-  <div>17% 🔋</div>
+<div class="phone">
+
+<!-- FILA 1 -->
+<div class="app" style="top:90px; left:25px;" onclick="openApp(this,'https://www.youtube.com/@loveubyae')">
+  <div class="icon" style="background-image:url('https://cdn-icons-png.flaticon.com/512/1384/1384060.png')">
+    <div class="badge">3</div>
+  </div>
+  <div class="label">YouTube</div>
 </div>
 
-<div class="home">
-
-  <div class="app" onclick="openApp('https://www.youtube.com/@loveubyae')">
-    <div class="icon" style="background-image:url('https://cdn-icons-png.flaticon.com/512/1384/1384060.png')"></div>
-    YouTube
-  </div>
-
-  <div class="app" onclick="openApp('https://www.instagram.com/loveubyae/')">
-    <div class="icon" style="background-image:url('https://cdn-icons-png.flaticon.com/512/2111/2111463.png')"></div>
-    Instagram
-  </div>
-
-  <div class="app" onclick="openApp('https://music.apple.com/us/artist/loveubyae/1742559202')">
-    <div class="icon" style="background-image:url('https://cdn-icons-png.flaticon.com/512/731/731985.png')"></div>
-    Music
-  </div>
-
-  <div class="app" onclick="openApp('https://soundcloud.com/loveubyae')">
-    <div class="icon" style="background-image:url('https://cdn-icons-png.flaticon.com/512/5968/5968940.png')"></div>
-    SoundCloud
-  </div>
-
-  <!-- FAKE APPS -->
-  <div class="app"><div class="icon" style="background-image:url('https://cdn-icons-png.flaticon.com/512/992/992651.png')"></div>Calculator</div>
-  <div class="app"><div class="icon" style="background-image:url('https://cdn-icons-png.flaticon.com/512/992/992700.png')"></div>Clock</div>
-  <div class="app"><div class="icon" style="background-image:url('https://cdn-icons-png.flaticon.com/512/1163/1163661.png')"></div>Weather</div>
-  <div class="app"><div class="icon" style="background-image:url('https://cdn-icons-png.flaticon.com/512/854/854878.png')"></div>Maps</div>
-
+<div class="app" style="top:90px; left:120px;" onclick="openApp(this,'https://www.instagram.com/loveubyae/')">
+  <div class="icon" style="background-image:url('https://cdn-icons-png.flaticon.com/512/2111/2111463.png')"></div>
+  <div class="label">Instagram</div>
 </div>
 
-<div class="dock">
-  <div class="icon" onclick="openApp('https://facebook.com')" style="background-image:url('https://cdn-icons-png.flaticon.com/512/733/733547.png')"></div>
-  <div class="icon" onclick="openApp('https://x.com/joseojovencito')" style="background-image:url('https://cdn-icons-png.flaticon.com/512/733/733579.png')"></div>
-  <div class="icon" onclick="openApp('tel:')" style="background-image:url('https://cdn-icons-png.flaticon.com/512/724/724664.png')"></div>
+<div class="app" style="top:90px; left:215px;" onclick="openApp(this,'https://music.apple.com/us/artist/loveubyae/1742559202')">
+  <div class="icon" style="background-image:url('https://cdn-icons-png.flaticon.com/512/731/731985.png')"></div>
+  <div class="label">Music</div>
+</div>
+
+<div class="app" style="top:90px; left:310px;" onclick="openApp(this,'https://soundcloud.com/loveubyae')">
+  <div class="icon" style="background-image:url('https://cdn-icons-png.flaticon.com/512/5968/5968940.png')"></div>
+  <div class="label">SoundCloud</div>
+</div>
+
+<!-- FILA 2 -->
+<div class="app" style="top:190px; left:25px;">
+  <div class="icon wiggle" style="background-image:url('https://cdn-icons-png.flaticon.com/512/992/992651.png')"></div>
+  <div class="label">Calculator</div>
+</div>
+
+<div class="app" style="top:190px; left:120px;">
+  <div class="icon wiggle" style="background-image:url('https://cdn-icons-png.flaticon.com/512/992/992700.png')"></div>
+  <div class="label">Clock</div>
+</div>
+
+<div class="app" style="top:190px; left:215px;">
+  <div class="icon wiggle" style="background-image:url('https://cdn-icons-png.flaticon.com/512/1163/1163661.png')"></div>
+  <div class="label">Weather</div>
+</div>
+
+<div class="app" style="top:190px; left:310px;">
+  <div class="icon wiggle" style="background-image:url('https://cdn-icons-png.flaticon.com/512/854/854878.png')"></div>
+  <div class="label">Maps</div>
+</div>
+
 </div>
 
 <script>
-function openApp(url){
+function openApp(el,url){
+
+  // vibración móvil
+  if(navigator.vibrate) navigator.vibrate(10);
+
+  const rect = el.getBoundingClientRect();
+
   const overlay = document.createElement("div");
-  overlay.className = "opening";
+  overlay.className="open";
+  overlay.style.transformOrigin = `${rect.left}px ${rect.top}px`;
+
   document.body.appendChild(overlay);
 
   setTimeout(()=>{
     window.location.href = url;
-  },400);
+  },300);
 }
 </script>
 
