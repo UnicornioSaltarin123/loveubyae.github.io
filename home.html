@@ -2,102 +2,86 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>loveubyae</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-
 body{
-  height:100dvh;
-  background:url("Untitled homexcreen.jpg") center/cover no-repeat;
-  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;
-  overflow:hidden;
+  margin:0;
+  background:black;
   display:flex;
   justify-content:center;
-  color:white;
+  align-items:center;
+  height:100vh;
+  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
 }
 
+/* IPHONE */
 .phone{
-  width:390px;
-  height:100%;
   position:relative;
+  height:90vh;
+  aspect-ratio:9/16;
+  max-width:420px;
+  overflow:hidden;
+  border-radius:30px;
 }
 
-/* APP */
-.app{
+/* FONDO */
+.wallpaper{
   position:absolute;
-  width:70px;
-  text-align:center;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* APPS */
+.apps{
+  position:absolute;
+  top:40px;
+  width:100%;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:25px;
+  justify-items:center;
+}
+
+/* ICONOS */
+.app{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-decoration:none;
+  color:white;
+  font-size:12px;
   user-select:none;
 }
 
-/* ICON */
-.icon{
+.app img{
   width:60px;
   height:60px;
-  border-radius:14px;
-  background-size:cover;
-  background-position:center;
-  margin:auto;
-
+  border-radius:22%;
+  transition:.2s;
   box-shadow:
-    0 4px 8px rgba(0,0,0,0.6),
-    inset 0 1px 1px rgba(255,255,255,0.3);
-
-  transition:all .15s ease;
-  position:relative;
+    inset 0 2px 3px rgba(255,255,255,0.6),
+    inset 0 -2px 3px rgba(0,0,0,0.2),
+    0 4px 10px rgba(0,0,0,0.4);
 }
 
-/* BADGE */
-.badge{
-  position:absolute;
-  top:-6px;
-  right:-6px;
-  background:#ff3b30;
-  color:white;
-  font-size:10px;
-  padding:2px 5px;
-  border-radius:10px;
-  border:1px solid rgba(0,0,0,0.3);
+/* CLICK */
+.app:active img{
+  transform:scale(0.85);
 }
 
-/* LABEL */
-.label{
-  font-size:11px;
-  margin-top:4px;
-  text-shadow:0 1px 2px black;
+/* 🔥 JIGGLE LENTO */
+.apps.edit .app img{
+  animation:jiggle 1.4s infinite;
 }
 
-/* TAP */
-.app:active .icon{
-  transform:scale(0.8);
-  filter:brightness(0.6);
-}
-
-/* WIGGLE */
-.wiggle{
-  animation:wiggle .2s infinite alternate;
-}
-
-@keyframes wiggle{
-  from{transform:rotate(-2deg);}
-  to{transform:rotate(2deg);}
-}
-
-/* OPEN */
-.open{
-  position:fixed;
-  inset:0;
-  background:black;
-  z-index:999;
-  animation:zoom .35s forwards;
-}
-
-@keyframes zoom{
-  0%{transform:scale(.3);opacity:0;}
-  100%{transform:scale(1);opacity:1;}
+@keyframes jiggle{
+  0%{ transform:rotate(-1deg);}
+  50%{ transform:rotate(1deg);}
+  100%{ transform:rotate(-1deg);}
 }
 </style>
 </head>
@@ -106,70 +90,74 @@ body{
 
 <div class="phone">
 
-<!-- FILA 1 -->
-<div class="app" style="top:90px; left:25px;" onclick="openApp(this,'https://www.youtube.com/@loveubyae')">
-  <div class="icon" style="background-image:url('https://cdn-icons-png.flaticon.com/512/1384/1384060.png')">
-    <div class="badge">3</div>
+  <!-- FONDO -->
+  <img class="wallpaper" src="Untitled homexcreen.jpg">
+
+  <!-- APPS -->
+  <div class="apps">
+
+    <a class="app" href="https://www.youtube.com/@loveubyae">
+      <img src="youtube.png">
+      <span>YouTube</span>
+    </a>
+
+    <a class="app" href="https://www.instagram.com/loveubyae/">
+      <img src="instagram.png">
+      <span>Instagram</span>
+    </a>
+
+    <a class="app" href="https://music.apple.com/us/artist/loveubyae/1742559202">
+      <img src="music.png">
+      <span>Music</span>
+    </a>
+
+    <a class="app" href="https://soundcloud.com/loveubyae">
+      <img src="soundcloud.png">
+      <span>SoundCloud</span>
+    </a>
+
+    <!-- SEGUNDA FILA -->
+
+    <div class="app">
+      <img src="calculator.png">
+      <span>Calculator</span>
+    </div>
+
+    <div class="app">
+      <img src="clock.png">
+      <span>Clock</span>
+    </div>
+
+    <div class="app">
+      <img src="weather.png">
+      <span>Weather</span>
+    </div>
+
+    <div class="app">
+      <img src="maps.png">
+      <span>Maps</span>
+    </div>
+
   </div>
-  <div class="label">YouTube</div>
-</div>
-
-<div class="app" style="top:90px; left:120px;" onclick="openApp(this,'https://www.instagram.com/loveubyae/')">
-  <div class="icon" style="background-image:url('https://cdn-icons-png.flaticon.com/512/2111/2111463.png')"></div>
-  <div class="label">Instagram</div>
-</div>
-
-<div class="app" style="top:90px; left:215px;" onclick="openApp(this,'https://music.apple.com/us/artist/loveubyae/1742559202')">
-  <div class="icon" style="background-image:url('https://cdn-icons-png.flaticon.com/512/731/731985.png')"></div>
-  <div class="label">Music</div>
-</div>
-
-<div class="app" style="top:90px; left:310px;" onclick="openApp(this,'https://soundcloud.com/loveubyae')">
-  <div class="icon" style="background-image:url('https://cdn-icons-png.flaticon.com/512/5968/5968940.png')"></div>
-  <div class="label">SoundCloud</div>
-</div>
-
-<!-- FILA 2 -->
-<div class="app" style="top:190px; left:25px;">
-  <div class="icon wiggle" style="background-image:url('https://cdn-icons-png.flaticon.com/512/992/992651.png')"></div>
-  <div class="label">Calculator</div>
-</div>
-
-<div class="app" style="top:190px; left:120px;">
-  <div class="icon wiggle" style="background-image:url('https://cdn-icons-png.flaticon.com/512/992/992700.png')"></div>
-  <div class="label">Clock</div>
-</div>
-
-<div class="app" style="top:190px; left:215px;">
-  <div class="icon wiggle" style="background-image:url('https://cdn-icons-png.flaticon.com/512/1163/1163661.png')"></div>
-  <div class="label">Weather</div>
-</div>
-
-<div class="app" style="top:190px; left:310px;">
-  <div class="icon wiggle" style="background-image:url('https://cdn-icons-png.flaticon.com/512/854/854878.png')"></div>
-  <div class="label">Maps</div>
-</div>
 
 </div>
 
+<!-- 🔥 SCRIPT JIGGLE -->
 <script>
-function openApp(el,url){
+let pressTimer;
 
-  // vibración móvil
-  if(navigator.vibrate) navigator.vibrate(10);
+document.querySelectorAll('.app').forEach(app => {
 
-  const rect = el.getBoundingClientRect();
+  app.addEventListener('mousedown', () => {
+    pressTimer = setTimeout(() => {
+      document.querySelector('.apps').classList.toggle('edit');
+    }, 500);
+  });
 
-  const overlay = document.createElement("div");
-  overlay.className="open";
-  overlay.style.transformOrigin = `${rect.left}px ${rect.top}px`;
+  app.addEventListener('mouseup', () => clearTimeout(pressTimer));
+  app.addEventListener('mouseleave', () => clearTimeout(pressTimer));
 
-  document.body.appendChild(overlay);
-
-  setTimeout(()=>{
-    window.location.href = url;
-  },300);
-}
+});
 </script>
 
 </body>
