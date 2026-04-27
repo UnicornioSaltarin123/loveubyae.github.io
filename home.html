@@ -11,11 +11,32 @@
 }
 
 body{
-  height:100dvh;
-  background:url("Untitled.jpg") center/cover no-repeat;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:black;
   font-family:-apple-system,sans-serif;
   overflow:hidden;
+}
+
+/* 📱 CONTENEDOR IPHONE */
+.phone{
+  width:clamp(320px, 28vw, 480px);
+  aspect-ratio:9/16;
+  position:relative;
+  overflow:hidden;
+  background:url("Untitled.jpg") center/cover no-repeat;
   color:white;
+}
+
+/* 📱 MOBILE FULL */
+@media (max-width:768px){
+  .phone{
+    width:100vw;
+    height:100dvh;
+    aspect-ratio:unset;
+  }
 }
 
 /* STATUS BAR */
@@ -29,7 +50,7 @@ body{
   font-size:14px;
 }
 
-/* GRID APPS */
+/* APPS GRID */
 .apps{
   position:absolute;
   top:80px;
@@ -80,8 +101,8 @@ body{
   border-radius:15px;
 }
 
-/* ANIMACIÓN ENTRADA */
-body{
+/* ANIMACIÓN iOS */
+.phone{
   animation:fadeIn 0.4s ease;
 }
 
@@ -94,63 +115,67 @@ body{
 
 <body>
 
-<!-- STATUS -->
-<div class="status">
-  <div>No Service</div>
-  <div id="time"></div>
-  <div>1%</div>
-</div>
+<div class="phone">
 
-<!-- APPS -->
-<div class="apps">
-
-  <div class="app">
-    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png">
-    Youtube
+  <!-- STATUS -->
+  <div class="status">
+    <div>No Service</div>
+    <div id="time"></div>
+    <div>1%</div>
   </div>
 
-  <div class="app">
-    <img src="https://cdn-icons-png.flaticon.com/512/174/174872.png">
-    Spotify
+  <!-- APPS -->
+  <div class="apps">
+
+    <div class="app">
+      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png">
+      Youtube
+    </div>
+
+    <div class="app">
+      <img src="https://cdn-icons-png.flaticon.com/512/174/174872.png">
+      Spotify
+    </div>
+
+    <div class="app">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111624.png">
+      Soundcloud
+    </div>
+
+    <div class="app">
+      <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png">
+      App Store
+    </div>
+
+    <div class="app">
+      <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png">
+      Notes
+    </div>
+
+    <div class="app">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
+      Instagram
+    </div>
+
+    <div class="app">
+      <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png">
+      Weather
+    </div>
+
+    <div class="app">
+      <img src="https://cdn-icons-png.flaticon.com/512/727/727245.png">
+      Music
+    </div>
+
   </div>
 
-  <div class="app">
-    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111624.png">
-    Soundcloud
+  <!-- DOCK -->
+  <div class="dock">
+    <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png">
+    <img src="https://cdn-icons-png.flaticon.com/512/1829/1829586.png">
+    <img src="https://cdn-icons-png.flaticon.com/512/2920/2920349.png">
   </div>
 
-  <div class="app">
-    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png">
-    App Store
-  </div>
-
-  <div class="app">
-    <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png">
-    Notes
-  </div>
-
-  <div class="app">
-    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
-    Instagram
-  </div>
-
-  <div class="app">
-    <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png">
-    Weather
-  </div>
-
-  <div class="app">
-    <img src="https://cdn-icons-png.flaticon.com/512/727/727245.png">
-    Music
-  </div>
-
-</div>
-
-<!-- DOCK -->
-<div class="dock">
-  <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png">
-  <img src="https://cdn-icons-png.flaticon.com/512/1829/1829586.png">
-  <img src="https://cdn-icons-png.flaticon.com/512/2920/2920349.png">
 </div>
 
 <script>
