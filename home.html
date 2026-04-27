@@ -4,11 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
   min-height:100vh;
@@ -17,21 +13,18 @@ body{
   align-items:center;
   background:black;
   font-family:-apple-system,sans-serif;
-  overflow:hidden;
 }
 
-/* 📱 CONTENEDOR IPHONE */
 .phone{
-  width:clamp(320px, 28vw, 480px);
+  width:clamp(320px,28vw,480px);
   aspect-ratio:9/16;
-  position:relative;
-  overflow:hidden;
   background:url("Untitled.jpg") center/cover no-repeat;
+  position:relative;
   color:white;
 }
 
-/* 📱 MOBILE FULL */
-@media (max-width:768px){
+/* MOBILE */
+@media(max-width:768px){
   .phone{
     width:100vw;
     height:100dvh;
@@ -39,18 +32,7 @@ body{
   }
 }
 
-/* STATUS BAR */
-.status{
-  position:absolute;
-  top:5px;
-  width:100%;
-  display:flex;
-  justify-content:space-between;
-  padding:0 15px;
-  font-size:14px;
-}
-
-/* APPS GRID */
+/* APPS */
 .apps{
   position:absolute;
   top:80px;
@@ -62,18 +44,8 @@ body{
   text-align:center;
 }
 
-.app{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  font-size:13px;
-}
-
 .app img{
-  width:65px;
-  height:65px;
-  border-radius:18px;
-  margin-bottom:6px;
+  width:65px;height:65px;border-radius:18px;
 }
 
 /* DOCK */
@@ -84,31 +56,16 @@ body{
   transform:translateX(-50%);
   width:90%;
   height:90px;
-
   background:rgba(255,255,255,0.2);
   backdrop-filter:blur(10px);
-
   border-radius:25px;
-
   display:flex;
   justify-content:space-around;
   align-items:center;
 }
 
 .dock img{
-  width:60px;
-  height:60px;
-  border-radius:15px;
-}
-
-/* ANIMACIÓN iOS */
-.phone{
-  animation:fadeIn 0.4s ease;
-}
-
-@keyframes fadeIn{
-  from{opacity:0; transform:scale(1.05);}
-  to{opacity:1; transform:scale(1);}
+  width:60px;height:60px;border-radius:15px;
 }
 </style>
 </head>
@@ -117,76 +74,37 @@ body{
 
 <div class="phone">
 
-  <!-- STATUS -->
-  <div class="status">
-    <div>No Service</div>
-    <div id="time"></div>
-    <div>1%</div>
+<div class="apps">
+
+  <div class="app">
+    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png">
+    Youtube
   </div>
 
-  <!-- APPS -->
-  <div class="apps">
-
-    <div class="app">
-      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png">
-      Youtube
-    </div>
-
-    <div class="app">
-      <img src="https://cdn-icons-png.flaticon.com/512/174/174872.png">
-      Spotify
-    </div>
-
-    <div class="app">
-      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111624.png">
-      Soundcloud
-    </div>
-
-    <div class="app">
-      <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png">
-      App Store
-    </div>
-
-    <div class="app">
-      <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png">
-      Notes
-    </div>
-
-    <div class="app">
-      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
-      Instagram
-    </div>
-
-    <div class="app">
-      <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png">
-      Weather
-    </div>
-
-    <div class="app">
-      <img src="https://cdn-icons-png.flaticon.com/512/727/727245.png">
-      Music
-    </div>
-
+  <div class="app">
+    <img src="https://cdn-icons-png.flaticon.com/512/174/174872.png">
+    Spotify
   </div>
 
-  <!-- DOCK -->
-  <div class="dock">
-    <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png">
-    <img src="https://cdn-icons-png.flaticon.com/512/1829/1829586.png">
-    <img src="https://cdn-icons-png.flaticon.com/512/2920/2920349.png">
+  <div class="app">
+    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111624.png">
+    Soundcloud
+  </div>
+
+  <div class="app">
+    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png">
+    App Store
   </div>
 
 </div>
 
-<script>
-function updateTime(){
-  const now = new Date();
-  document.getElementById("time").textContent =
-    now.toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
-}
-setInterval(updateTime,1000);
-updateTime();
-</script>
+<div class="dock">
+  <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png">
+  <img src="https://cdn-icons-png.flaticon.com/512/1829/1829586.png">
+  <img src="https://cdn-icons-png.flaticon.com/512/2920/2920349.png">
+</div>
+
+</div>
 
 </body>
 </html>
