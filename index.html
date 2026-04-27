@@ -29,7 +29,8 @@ body{
   overflow:hidden;
   background:url("Untitled.jpg") center/cover no-repeat;
   color:white;
-  will-change: transform, opacity, filter;
+
+  padding-bottom:110px; /* 🔥 FIX DEL CORTE */
 }
 
 /* overlay */
@@ -117,7 +118,7 @@ body{
 /* 🔓 SLIDER */
 .slider{
   position:absolute;
-  bottom:calc(env(safe-area-inset-bottom) + 12px);
+  bottom:calc(env(safe-area-inset-bottom) + 30px); /* 🔥 FIX */
   left:50%;
   transform:translateX(-50%);
   width:92%;
@@ -234,7 +235,7 @@ function updateTime(){
 setInterval(updateTime,1000);
 updateTime();
 
-/* 🔥 SLIDE */
+/* SLIDE */
 const btn=document.querySelector(".slider-btn");
 const slider=document.querySelector(".slider");
 const text=document.querySelector(".slider-text");
