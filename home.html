@@ -3,9 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cuidarte</title> <!-- 🔥 esto controla el nombre del tab -->
-<link rel="icon" type="image/jpeg" href="favicon.jpg">
-<link rel="apple-touch-icon" href="favicon.jpg">
+<title>Cuidarte</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -13,20 +11,13 @@
 body{
   height:100dvh;
   background:url("Untitled FONDO COMPLETO DE LA WEB.jpg") center/cover no-repeat;
-
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "SF Pro Text",
-    "Helvetica Neue",
-    Helvetica,
-    Arial,
-    sans-serif;
-
+  font-family:-apple-system, sans-serif;
   overflow:hidden;
+
+  transition:transform .2s ease, opacity .2s ease;
 }
 
-/* 📱 TELEFONO */
+/* 📱 PHONE */
 .phone{
   position:absolute;
   top:50%;
@@ -67,31 +58,29 @@ body{
   text-shadow:0 1px 2px rgba(0,0,0,0.9);
 }
 
-/* ICONOS */
+/* ICON */
 .app img{
   width:100px;
   height:100px;
   border-radius:22%;
   object-fit:cover;
 
-  /* sombra ligera estilo iOS */
   box-shadow:0 6px 12px rgba(0,0,0,0.35);
 
-  transition:.15s ease;
+  transition:transform .12s ease, filter .12s ease;
 }
 
-/* CLICK */
 .app:active img{
-  transform:scale(0.88);
+  transform:scale(0.8);
+  filter:brightness(0.75);
 }
 
-/* 📱 MOBILE */
+/* MOBILE */
 @media (max-width:768px){
   .phone{
     width:100vw;
     height:100dvh;
     aspect-ratio:auto;
-
     top:0;
     left:0;
     transform:none;
@@ -111,7 +100,7 @@ body{
 
   <div class="apps">
 
-    <!-- 🔥 PRIMERA FILA -->
+    <!-- 🔥 FILA 1 -->
     <a class="app" href="https://www.youtube.com/@loveubyae">
       <img src="yt.png">
       <span>YouTube</span>
@@ -122,7 +111,7 @@ body{
       <span>Instagram</span>
     </a>
 
-    <a class="app" href="https://open.spotify.com/intl-es/artist/3mKaKeiv9UUbJSAHr8VqFe">
+    <a class="app" href="https://open.spotify.com/artist/3mKaKeiv9UUbJSAHr8VqFe">
       <img src="spotify-2012-06-25.png">
       <span>Spotify</span>
     </a>
@@ -132,36 +121,79 @@ body{
       <span>Music</span>
     </a>
 
-    <!-- 🔥 SEGUNDA FILA -->
+    <!-- 🔥 FILA 2 -->
     <a class="app" href="https://soundcloud.com/loveubyae">
       <img src="sc.png">
       <span>SoundCloud</span>
     </a>
 
-    <div class="app">
-      <img src="calculator.png">
-      <span>Calculator</span>
-    </div>
+    <a class="app" href="https://linktr.ee/loveubyae">
+      <img src="linktree.png">
+      <span>Linktree</span>
+    </a>
 
-    <div class="app">
-      <img src="clock.png">
-      <span>Clock</span>
-    </div>
+    <a class="app" href="notes.html">
+      <img src="Notes.png">
+      <span>Notes</span>
+    </a>
 
     <div class="app">
       <img src="weather.png">
       <span>Weather</span>
     </div>
 
-    <!-- 🔥 TERCERA FILA -->
+    <!-- 🔥 FILA 3 -->
     <div class="app">
       <img src="maps.png">
       <span>Maps</span>
     </div>
 
+    <a class="app" href="photos.html">
+      <img src="fotos.png">
+      <span>Photos</span>
+    </a>
+
+    <a class="app" href="safari.html">
+      <img src="safari-iphone-icon-26-removebg-preview.png">
+      <span>Safari</span>
+    </a>
+
+    <!-- ⏰ CLOCK (NO HACE NADA) -->
+    <div class="app">
+      <img src="clock.png">
+      <span>Clock</span>
+    </div>
+
   </div>
 
 </div>
+
+<!-- 🔊 SONIDO -->
+<audio id="clickSound" src="click.mp3"></audio>
+
+<script>
+const sound = document.getElementById("clickSound");
+
+document.querySelectorAll("a.app").forEach(app=>{
+  app.addEventListener("click", (e)=>{
+    const link = app.getAttribute("href");
+
+    if(link){
+      e.preventDefault();
+
+      sound.currentTime = 0;
+      sound.play();
+
+      document.body.style.transform = "scale(1.1)";
+      document.body.style.opacity = "0";
+
+      setTimeout(()=>{
+        window.location.href = link;
+      },180);
+    }
+  });
+});
+</script>
 
 </body>
 </html>
