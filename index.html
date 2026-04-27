@@ -11,7 +11,7 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-  height:100vh;
+  height:100dvh; /* 🔥 FIX REAL */
   background:url("Untitled FONDO COMPLETO DE LA WEB.jpg") center/cover no-repeat;
   font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;
   overflow:hidden;
@@ -77,7 +77,7 @@ body{
   font-size:clamp(14px,1.2vw,20px);
 }
 
-/* 🔥 NOTIFICATIONS DESKTOP */
+/* 🔥 NOTIFICATIONS */
 .notifications{
   position:absolute;
   top:220px;
@@ -108,7 +108,7 @@ body{
 /* 🔓 SLIDER */
 .slider{
   position:absolute;
-  bottom:10px;
+  bottom:calc(10px + env(safe-area-inset-bottom)); /* 🔥 FIX */
   left:50%;
   transform:translateX(-50%);
   width:92%;
@@ -163,20 +163,20 @@ body{
   to{background-position:-100% 0;}
 }
 
-/* 📱 MOBILE FIX REAL */
+/* 📱 MOBILE FIX */
 @media (max-width:768px){
   .phone{
     width:100vw;
-    height:100vh;
+    height:100dvh; /* 🔥 FIX REAL */
     aspect-ratio:auto;
+
     top:0;
     left:0;
     transform:none;
   }
 
-  /* 🔥 AQUÍ ESTÁ EL FIX */
   .notifications{
-    top:28vh; /* 👈 ahora SI adapta al teléfono */
+    top:28vh;
     left:0;
     transform:none;
     max-width:none;
