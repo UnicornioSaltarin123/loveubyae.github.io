@@ -28,6 +28,8 @@ body{
   position:relative;
   overflow:hidden;
   background:url("Untitled.jpg") center/cover no-repeat;
+
+  animation:fadeIn 0.8s ease;
 }
 
 /* NOISE */
@@ -97,6 +99,7 @@ body{
   top:30vh;
   width:100%;
   z-index:2;
+  animation:slideUp 0.9s ease;
 }
 
 .notification{
@@ -120,7 +123,7 @@ body{
 /* 🔓 SLIDER */
 .slider{
   position:absolute;
-  bottom:calc(env(safe-area-inset-bottom) + 12px); /* 🔥 CLAVE */
+  bottom:calc(env(safe-area-inset-bottom) + 12px);
   left:50%;
   transform:translateX(-50%);
   width:92%;
@@ -133,6 +136,8 @@ body{
   align-items:center;
   padding:10px;
   z-index:2;
+
+  animation:fadeIn 1.2s ease;
 }
 
 .slider-btn{
@@ -145,9 +150,36 @@ body{
   align-items:center;
   font-size:34px;
   color:#777;
+
+  position:relative;
+  cursor:pointer;
+  transition:transform 0.2s ease;
 }
 
-/* 📱 MOBILE FIX REAL */
+/* ✨ ANIMACIONES iOS 7 */
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    filter:blur(10px);
+  }
+  to{
+    opacity:1;
+    filter:blur(0);
+  }
+}
+
+@keyframes slideUp{
+  from{
+    transform:translateY(40px);
+    opacity:0;
+  }
+  to{
+    transform:translateY(0);
+    opacity:1;
+  }
+}
+
+/* 📱 MOBILE */
 @media (max-width:768px){
 
   body{
@@ -156,9 +188,9 @@ body{
 
   .phone{
     width:100vw;
-    height:100dvh; /* 🔥 en vez de 100vh */
+    height:100dvh;
     aspect-ratio:unset;
-    transform:none; /* ❌ quitamos scale */
+    transform:none;
   }
 
   .time{
@@ -252,9 +284,66 @@ function updateTime(){
       month:"long"
     });
 }
-
 setInterval(updateTime,1000);
 updateTime();
+
+/* 🔥 SLIDE FUNCIONAL */
+const slider = document.querySelector(".slider");
+const btn = document.querySelector(".slider-btn");
+
+let isDragging = false;
+let startX = 0;
+let currentX = 0;
+let maxSlide = slider.offsetWidth - btn.offsetWidth - 20;
+
+function start(e){
+  isDragging = true;
+  startX = (e.touches ? e.touches[0].clientX : e.clientX);
+}
+
+function move(e){
+  if(!isDragging) return;
+
+  currentX = (e.touches ? e.touches[0].clientX : e.clientX);
+  let diff = currentX - startX;
+
+  if(diff < 0) diff = 0;
+  if(diff > maxSlide) diff = maxSlide;
+
+  btn.style.transform = `translateX(${diff}px)`;
+
+  if(diff >= maxSlide){
+    unlock();
+  }
+}
+
+function end(){
+  if(!isDragging) return;
+  isDragging = false;
+  btn.style.transform = "translateX(0)";
+}
+
+function unlock(){
+  isDragging = false;
+
+  const phone = document.querySelector(".phone");
+  phone.style.transition = "all 0.6s ease";
+  phone.style.transform = "scale(1.1)";
+  phone.style.opacity = "0";
+
+  setTimeout(()=>{
+    window.location.href = "home.html";
+  },600);
+}
+
+/* eventos */
+btn.addEventListener("mousedown", start);
+document.addEventListener("mousemove", move);
+document.addEventListener("mouseup", end);
+
+btn.addEventListener("touchstart", start);
+document.addEventListener("touchmove", move);
+document.addEventListener("touchend", end);
 </script>
 
 </body>
