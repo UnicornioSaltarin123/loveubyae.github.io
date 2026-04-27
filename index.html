@@ -11,7 +11,7 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-  height:100dvh; /* 🔥 FIX REAL */
+  height:100dvh;
   background:url("Untitled FONDO COMPLETO DE LA WEB.jpg") center/cover no-repeat;
   font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;
   overflow:hidden;
@@ -68,16 +68,18 @@ body{
   background:rgba(0,0,0,0.35);
 }
 
+/* 🔥 HORA MEJORADA */
 .time{
-  font-size:clamp(60px,5vw,90px);
-  font-weight:100;
+  font-size:clamp(80px,7vw,96px); /* más grande */
+  font-weight:300; /* más gruesa tipo iOS */
+  letter-spacing:1px;
 }
 
 .date{
   font-size:clamp(14px,1.2vw,20px);
 }
 
-/* 🔥 NOTIFICATIONS */
+/* 🔔 NOTIFICATIONS */
 .notifications{
   position:absolute;
   top:220px;
@@ -108,7 +110,7 @@ body{
 /* 🔓 SLIDER */
 .slider{
   position:absolute;
-  bottom:calc(10px + env(safe-area-inset-bottom)); /* 🔥 FIX */
+  bottom:calc(10px + env(safe-area-inset-bottom));
   left:50%;
   transform:translateX(-50%);
   width:92%;
@@ -167,7 +169,7 @@ body{
 @media (max-width:768px){
   .phone{
     width:100vw;
-    height:100dvh; /* 🔥 FIX REAL */
+    height:100dvh;
     aspect-ratio:auto;
 
     top:0;
