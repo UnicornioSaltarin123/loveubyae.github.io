@@ -14,6 +14,9 @@ body{
   background:url("Untitled FONDO COMPLETO DE LA WEB.jpg") center/cover no-repeat;
   font-family:-apple-system;
   overflow:hidden;
+
+  overscroll-behavior-x:none;
+  touch-action:pan-y;
 }
 
 /* 📱 PHONE */
@@ -50,7 +53,7 @@ body{
   z-index:1;
 
   display:grid;
-  grid-template-columns:repeat(5,1fr); /* 🔥 más pequeñas */
+  grid-template-columns:repeat(5,1fr);
   gap:1px;
   padding:2px;
 
@@ -116,6 +119,8 @@ body{
 </div>
 
 <script>
+history.scrollRestoration = "manual";
+
 const gallery = document.getElementById("gallery");
 const viewer = document.getElementById("viewer");
 const fullImg = document.getElementById("fullImg");
@@ -218,7 +223,7 @@ viewer.addEventListener("touchend", e=>{
   fullImg.src = images[currentIndex];
 });
 
-/* 🔥 SWIPE BACK */
+/* 🔥 SWIPE BACK FIX REAL */
 let swipeStart = 0;
 let isEdge = false;
 
@@ -234,6 +239,8 @@ window.addEventListener("touchstart", e=>{
 window.addEventListener("touchmove", e=>{
   if(!isEdge) return;
 
+  e.preventDefault(); // 🔥 clave anti navegador
+
   let x = e.touches[0].clientX;
   let diff = x - swipeStart;
 
@@ -245,7 +252,7 @@ window.addEventListener("touchmove", e=>{
     homeBg.style.transform = `scale(${0.95 + progress*0.05})`;
     homeBg.style.opacity = progress;
   }
-},{ passive:true });
+}, { passive:false });
 
 window.addEventListener("touchend", e=>{
   if(!isEdge) return;
