@@ -215,7 +215,7 @@ body{
 function updateTime(){
   const now=new Date();
   time.textContent=now.toLocaleTimeString("es-MX",{hour:"2-digit",minute:"2-digit",hour12:false});
-  date.textContent=now.toLocaleDateString("es-MX",{weekday:"long",day:"numeric",month:"long"});
+  date.textContent=now.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"});
 }
 setInterval(updateTime,1000);
 updateTime();
