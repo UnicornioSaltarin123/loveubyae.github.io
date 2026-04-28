@@ -5,17 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cuidarte</title>
 
+<meta name="app-version" content="1.0.0">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 
-body{
-  height:100dvh;
-  background:url("Untitled FONDO COMPLETO DE LA WEB.jpg") center/cover no-repeat;
-  font-family:-apple-system;
+html,body{
+  height:100%;
   overflow:hidden;
 }
 
-/* 📱 PHONE */
+/* bloquear selección */
+body{
+  user-select:none;
+  -webkit-user-select:none;
+
+  height:100dvh;
+  background:url("Untitled FONDO COMPLETO DE LA WEB.jpg") center/cover no-repeat;
+  font-family:-apple-system;
+}
+
+/* PHONE */
 .phone{
   position:absolute;
   top:50%;
@@ -59,9 +69,10 @@ body{
 </div>
 
 <script>
+const VERSION="1.0.0";
 const phone = document.getElementById("phone");
 
-/* 📱 SWIPE SOLO EN MÓVIL */
+/* SWIPE SOLO EN MÓVIL */
 let startX = 0;
 let currentX = 0;
 let isDragging = false;
@@ -101,27 +112,48 @@ phone.addEventListener("touchend", ()=>{
   }
 });
 
-/* 💻 TECLADO (PC) */
+/* TECLADO (PC) */
 document.addEventListener("keydown", e=>{
+  const k = e.key.toLowerCase();
+
   if(
-    e.key === "ArrowLeft" ||
-    e.key === "ArrowRight" ||
-    e.key.toLowerCase() === "a" ||
-    e.key.toLowerCase() === "d"
+    k === "arrowleft" ||
+    k === "arrowright" ||
+    k === "a" ||
+    k === "d"
   ){
     goHome();
   }
 });
 
-/* 🔥 FUNCIÓN */
+/* FUNCIÓN */
 function goHome(){
   phone.style.transform = "translateX(100%)";
   phone.style.opacity = "0";
 
   setTimeout(()=>{
-    window.location.href = "home.html";
+    window.location.href = "home.html?v="+VERSION;
   },250);
 }
+
+/* BLOQUEOS */
+
+/* click derecho */
+document.addEventListener("contextmenu",e=>e.preventDefault());
+
+/* F12 + inspect (FIXED) */
+document.addEventListener("keydown",e=>{
+  const k = e.key.toLowerCase();
+
+  if(
+    e.key==="F12" ||
+    (e.ctrlKey && e.shiftKey && ["i","j","c"].includes(k)) ||
+    (e.ctrlKey && k==="u")
+  ){
+    e.preventDefault();
+    e.stopPropagation(); // 
+  }
+});
 </script>
 
 </body>
