@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cuidarte</title>
 
+<script>
+function setRealVH(){
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', vh + 'px');
+}
+setRealVH();
+window.addEventListener('resize', setRealVH);
+</script>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 
@@ -14,13 +23,12 @@ html, body{
 }
 
 body{
-  min-height:100vh;
-  height:100svh;
+  height:calc(var(--vh, 1vh) * 100);
   background:url("Untitled FONDO COMPLETO DE LA WEB.jpg") center/cover no-repeat;
   font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;
 }
 
-/* 📱 TELEFONO (PC NORMAL) */
+/* 📱 PHONE (PC NORMAL) */
 .phone{
   position:absolute;
   top:50%;
@@ -52,7 +60,7 @@ body{
   pointer-events:none;
 }
 
-/* 🕒 */
+/* 🕒 TIME */
 .time-box{
   position:absolute;
   top:6%;
@@ -109,7 +117,7 @@ body{
   border-radius:10px;
 }
 
-/* 🔓 BARRA */
+/* 🔓 BAR */
 .unlock-bar{
   position:absolute;
   bottom:0;
@@ -120,7 +128,7 @@ body{
   z-index:3;
 }
 
-/* TEXTO */
+/* TEXT EFFECT */
 .swipe-text{
   position:absolute;
   bottom:28px;
@@ -141,7 +149,7 @@ body{
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 
-  animation:shineMove 4.0s linear infinite;
+  animation:shineMove 4s linear infinite;
 }
 
 @keyframes shineMove{
@@ -149,11 +157,11 @@ body{
   to{background-position:-100% 0;}
 }
 
-/* 📱 MOBILE (FIX REAL) */
+/* 📱 MOBILE FIX REAL */
 @media (max-width:768px){
   .phone{
     width:100vw;
-    height:100dvh;
+    height:calc(var(--vh, 1vh) * 100);
     aspect-ratio:auto;
     top:0;
     left:0;
@@ -241,7 +249,7 @@ unlockArea.addEventListener("touchmove", e=>{
   let currentY = e.touches[0].clientY;
   let diff = startY - currentY;
 
-  if(diff > 30){
+  if(diff > 25){
     unlock();
     isSwiping = false;
   }
@@ -262,7 +270,7 @@ unlockArea.addEventListener("mousemove", e=>{
 
   let diff = startY - e.clientY;
 
-  if(diff > 30){
+  if(diff > 25){
     unlock();
     isSwiping = false;
   }
