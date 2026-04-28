@@ -6,10 +6,21 @@
 
 <title>Photos</title>
 
+<meta name="app-version" content="1.0.0">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 
+html,body{
+  height:100%;
+  overflow:hidden;
+}
+
+/* 🔒 */
 body{
+  user-select:none;
+  -webkit-user-select:none;
+
   height:100dvh;
   background:url("Untitled FONDO COMPLETO DE LA WEB.jpg") center/cover no-repeat;
   font-family:-apple-system;
@@ -19,7 +30,7 @@ body{
   touch-action:pan-y;
 }
 
-/* 📱 PHONE */
+/* PHONE */
 .phone{
   position:absolute;
   top:50%;
@@ -34,7 +45,7 @@ body{
   transition:transform .25s ease, opacity .25s ease;
 }
 
-/* 🔥 HOME DETRÁS */
+/* HOME DETRÁS */
 #homeBg{
   position:absolute;
   inset:0;
@@ -119,6 +130,8 @@ body{
 </div>
 
 <script>
+const VERSION="1.0.0";
+
 history.scrollRestoration = "manual";
 
 const gallery = document.getElementById("gallery");
@@ -129,7 +142,7 @@ const homeBg = document.getElementById("homeBg");
 
 let currentIndex = 0;
 
-/* 🔥 IMÁGENES */
+/* IMÁGENES (igual que el tuyo) */
 const images = [
 "0b04015b70a2d5fb9b2ec735ebce50c3.jpg",
 "0ef281a5f2464955e05fd78472ce5586.jpg",
@@ -201,7 +214,7 @@ viewer.onclick = ()=>{
   viewer.style.display = "none";
 };
 
-/* 📱 SWIPE FOTOS */
+/* SWIPE FOTOS */
 let startX = 0;
 
 viewer.addEventListener("touchstart", e=>{
@@ -223,7 +236,7 @@ viewer.addEventListener("touchend", e=>{
   fullImg.src = images[currentIndex];
 });
 
-/* 🔥 SWIPE BACK FIX REAL */
+/* SWIPE BACK */
 let swipeStart = 0;
 let isEdge = false;
 
@@ -239,7 +252,7 @@ window.addEventListener("touchstart", e=>{
 window.addEventListener("touchmove", e=>{
   if(!isEdge) return;
 
-  e.preventDefault(); // 🔥 clave anti navegador
+  e.preventDefault();
 
   let x = e.touches[0].clientX;
   let diff = x - swipeStart;
@@ -252,7 +265,7 @@ window.addEventListener("touchmove", e=>{
     homeBg.style.transform = `scale(${0.95 + progress*0.05})`;
     homeBg.style.opacity = progress;
   }
-}, { passive:false });
+},{ passive:false });
 
 window.addEventListener("touchend", e=>{
   if(!isEdge) return;
@@ -270,9 +283,16 @@ window.addEventListener("touchend", e=>{
   }
 });
 
-/* 💻 PC */
+/* PC (FIX) */
 document.addEventListener("keydown", e=>{
-  if(["ArrowLeft","ArrowRight","a","d"].includes(e.key.toLowerCase())){
+  const k = e.key.toLowerCase();
+
+  if(
+    k==="arrowleft" ||
+    k==="arrowright" ||
+    k==="a" ||
+    k==="d"
+  ){
     goHome();
   }
 });
@@ -286,9 +306,28 @@ function goHome(){
   homeBg.style.opacity = "1";
 
   setTimeout(()=>{
-    window.location.href = "home.html";
+    window.location.href = "home.html?v="+VERSION;
   },200);
 }
+
+/* BLOQUEOS */
+
+/* click derecho */
+document.addEventListener("contextmenu",e=>e.preventDefault());
+
+/* F12 FIX (no rompe teclado) */
+document.addEventListener("keydown",e=>{
+  const k = e.key.toLowerCase();
+
+  if(
+    e.key==="F12" ||
+    (e.ctrlKey && e.shiftKey && ["i","j","c"].includes(k)) ||
+    (e.ctrlKey && k==="u")
+  ){
+    e.preventDefault();
+    e.stopPropagation();
+  }
+});
 </script>
 
 </body>
