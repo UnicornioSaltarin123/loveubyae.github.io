@@ -61,24 +61,23 @@ body{
 <script>
 const phone = document.getElementById("phone");
 
+/* 📱 SWIPE SOLO EN MÓVIL */
 let startX = 0;
 let currentX = 0;
 let isDragging = false;
 
-/* 👉 SOLO desde el borde izquierdo */
 phone.addEventListener("touchstart", e=>{
   startX = e.touches[0].clientX;
 
-  if(startX < 30){ // 🔥 zona edge
+  if(startX < 30){
     isDragging = true;
   }
 });
 
-/* 👉 mover */
 phone.addEventListener("touchmove", e=>{
   if(!isDragging) return;
 
-  e.preventDefault(); // 🔥 bloquea gesto del navegador
+  e.preventDefault();
 
   currentX = e.touches[0].clientX;
   let diff = currentX - startX;
@@ -88,7 +87,6 @@ phone.addEventListener("touchmove", e=>{
   }
 },{ passive:false });
 
-/* 👉 soltar */
 phone.addEventListener("touchend", ()=>{
   if(!isDragging) return;
 
@@ -96,17 +94,34 @@ phone.addEventListener("touchend", ()=>{
 
   let diff = currentX - startX;
 
-  if(diff > 100){
-    phone.style.transform = "translateX(100%)";
-    phone.style.opacity = "0";
-
-    setTimeout(()=>{
-      window.location.href = "home.html";
-    },250);
+  if(diff > 120){
+    goHome();
   }else{
     phone.style.transform = "translateX(0)";
   }
 });
+
+/* 💻 TECLADO (PC) */
+document.addEventListener("keydown", e=>{
+  if(
+    e.key === "ArrowLeft" ||
+    e.key === "ArrowRight" ||
+    e.key.toLowerCase() === "a" ||
+    e.key.toLowerCase() === "d"
+  ){
+    goHome();
+  }
+});
+
+/* 🔥 FUNCIÓN */
+function goHome(){
+  phone.style.transform = "translateX(100%)";
+  phone.style.opacity = "0";
+
+  setTimeout(()=>{
+    window.location.href = "home.html";
+  },250);
+}
 </script>
 
 </body>
