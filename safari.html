@@ -4,20 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cuidarte</title>
+
 <link rel="icon" type="image/jpeg" href="favicon.jpg">
 <link rel="apple-touch-icon" href="favicon.jpg">
+
+<!-- VERSION -->
+<meta name="app-version" content="1.0.0">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 
+/* bloquear selección */
 body{
+  user-select:none;
+  -webkit-user-select:none;
+
   height:100dvh;
   background:url("Untitled FONDO COMPLETO DE LA WEB.jpg") center/cover no-repeat;
   overflow:hidden;
   font-family:-apple-system;
 }
 
-/* 📱 PHONE */
+/* PHONE */
 .phone{
   position:absolute;
   top:50%;
@@ -73,7 +81,7 @@ body{
   100%{transform:translate(0);}
 }
 
-/* MENSAJES */
+/* TEXTO */
 .glitch-text{
   position:absolute;
   color:red;
@@ -112,16 +120,18 @@ body{
 <div class="flash" id="flash"></div>
 
 <script>
+const VERSION="1.0.0";
+
 const container = document.getElementById("container");
 const flash = document.getElementById("flash");
 const phone = document.getElementById("phone");
 
-/* 🔥 LINKS */
+/* LINKS */
 const links = [
 "https://youtube.com", "https://google.com", "https://twitter.com", "http://www.insecam.org/en/bytag/Education/", "https://picvoid.tumblr.com/archive", "https://youtu.be/3P-8s2e6AXg?t=157", "https://xenero.webs.uvigo.es/profesorado/beatriz_suarez/ciborg.pdf", "https://d2w9rnfcy7mm78.cloudfront.net/8654467/original_47ef72ec889dfa20de1b063c6fa01aa3.png", "https://www.tumblr.com/deathandmysticism", "https://youtu.be/0WjDrQ0IhBw?t=76", "https://www.youtube.com/watch?v=q6wDm9C5YEo", "https://youtube.com/playlist?list=PLc9GrLRgeU8sV5n9XyQWJJQTcelErn--6", "https://www.youtube.com/watch?v=QMBl1NmZ2OE", "https://aminoapps.com/c/vocaloid-amino-en-espanol/page/item/calne-ca/0ldG_LxuZIjz52QB1Qna2NxdWmvr30dd4b", "https://youtu.be/pZhUS_q4jkc?t=753", "https://www.youtube.com/watch?v=dGGWflJZwT0", "https://twitter.com/StrangestMedia", "https://kiddyp00l-blog.tumblr.com/", "https://webcamtears.tumblr.com/", "https://t4s.tumblr.com/", "https://youtu.be/g64bDAYsfLc?t=109", "https://www.youtube.com/watch?v=vyhgY7LiRQk", "https://www.cleverbot.com/", "https://www.youtube.com/watch?v=PgI80Ue-AMo", "https://www.youtube.com/watch?v=lxclwyVAw0k", "https://deathgenerator.com/#gallery", "https://on.soundcloud.com/HPUxQ", "https://www.youtube.com/watch?v=-8ECNTy84ME", "https://youtu.be/-Rk6wvwLNaw?t=5388", "https://youtu.be/LeA7I-U2pLY?t=7", "https://badfacesara.tumblr.com/", "https://simpsons-hit-and-run.fandom.com/wiki/Easter_Eggs", "https://www.gamespot.com/games/black/cheats/", "https://www.youtube.com/watch?v=2PmNx79Z0I0", "https://www.youtube.com/watch?v=MUXCUvgu4No", "https://es.wikipedia.org/wiki/Aritmoman%C3%ADa", "https://www.youtube.com/watch?v=GmULc5VANsw", "https://youtu.be/9lZB3xJwtUU", "https://nier.fandom.com/es/wiki/Finales_malos_(NieR:Automata)", "https://kingdomhearts.fandom.com/es/wiki/Kingdom_Hearts_II", "https://store.steampowered.com/app/40700/Machinarium/?l=spanish", "https://www.youtube.com/watch?v=qrUOBsr0GTM", "https://vocaloidenespaol.fandom.com/es/wiki/Kagome_Kagome", "https://www.youtube.com/watch?v=mMxD_xC75_g", "https://archive.org/details/pdfy-gWKEzx3RhEx6PnOv", "https://www.youtube.com/watch?v=NoYV58KChjA", "https://docs.google.com/document/d/1pvwIiQgoLDC6nIPpVZTGaKkp4FylvPkOzz7pDGRLw_g/edit", "http://dvdv.space/00000.html", "https://proyectoidis.org/", "https://crimideia.com.br/blog/wp-content/uploads/2010/02/emil-cioran-ese-maldito-yo28198729.pdf", "https://www.youtube.com/watch?v=JXBXp0BrGbo", "https://links.yesterweb.org/", "http://radicalart.info/QEndArt.html", "https://graymirror.substack.com/", "https://www.youtube.com/watch?v=iPbI5frMpA8", "http://www.scielo.org.co/pdf/ef/n38/n38a09.pdf", "https://youtu.be/TRivPJZPrRo?t=63", "https://www.youtube.com/watch?v=RElpX5WjOVc", "http://www.gothic-iowegian.com/catholic.html", "https://angel-town.cinni.net/", "https://cybergrunge.net/", "https://zegord.neocities.org/", "https://sergreti.neocities.org/", "https://blackwings.neocities.org/", "https://crosspollen.neocities.org/", "https://tawahel.neocities.org/", "https://talosprinciple.neocities.org/", "https://occult.neocities.org/", "https://lilith0x00.neocities.org/", "https://heaventopology.neocities.org/", "https://chaosinnomadic.neocities.org/", "https://lainchan.org/", "https://freesound.org/people/toam/sounds/193688/", "https://cinni.net/", "https://ens9004-infd.mendoza.edu.ar/", "https://www.youtube.com/watch?v=KkR6GGKRsBs", "https://roll20.net/", "https://www.reddit.com/r/AskReddit/", "http://lafundacionscp.wikidot.com/", "https://www.minijuegos.com/", "https://everskies.com/", "http://creepyadictos.blogspot.com/", "https://creepypastas.com/", "https://www.youtube.com/watch?v=vM34iKSsW0Y", "https://www.youtube.com/watch?v=sCNj0WMBkrs", "https://www.youtube.com/watch?v=YGeyM38DZ50", "http://www.insecam.org/", "https://thispersondoesnotexist.com", "http://www.omglasergunspewpewpew.com/", "https://www.simulation-argument.com/", "https://www.youtube.com/watch?v=4MWN48V0Oac", "https://www.youtube.com/channel/UCfJvn8LAFkRRPJNt8tTJumA/videos", "https://www.newgrounds.com/", "https://www.friv.com/", "https://www.youtube.com/watch?v=Tk391PPgLYo", "https://www.youtube.com/watch?v=O70Jb6exrOY", "https://vimeo.com/722069275", "https://darkrabbithole.neocities.org/", "http://deletedcity.net/", "https://darkandobscure.neocities.org/", "https://www.youtube.com/watch?v=onCbj0Eh-18", "https://boards.4channel.org/lit/", "https://boards.4channel.org/x/", "https://www.oblique-strategies.com/", "https://bloodfreak.neocities.org/", "https://www.thiswaifudoesnotexist.net/", "https://www.youtube.com/watch?v=y7x4CmWIeGE", "https://www.torproject.org/download/", "https://www.youtube.com/watch?v=bBRir92yuLs", "https://github.com/topics/wannacry", "https://www.cyberzoo.org/", "https://boards.4channel.org/c/", "https://uwcur.neocities.org/", "https://www.youtube.com/watch?v=h7gf5M04hdg", "https://yesterweb.org/", "https://forum.melonland.net/", "https://www.facebook.com/", "https://t.me/", "https://gifypet.neocities.org/"
 ];
 
-/* 🔥 IMÁGENES */
+/* IMÁGENES */
 const images = [
 "0b04015b70a2d5fb9b2ec735ebce50c3.jpg",
 "0ef281a5f2464955e05fd78472ce5586.jpg",
@@ -171,7 +181,7 @@ const images = [
 
 const items = [];
 
-/* FIX tamaño */
+/* SIZE */
 let W,H;
 function updateSize(){
   W = container.clientWidth;
@@ -237,7 +247,7 @@ function update(){
 }
 update();
 
-/* GLITCH RANDOM */
+/* GLITCH */
 setInterval(()=>{
   document.body.classList.add("glitch");
 
@@ -282,21 +292,39 @@ phone.addEventListener("touchend",()=>{
   }
 });
 
-/* TECLADO */
+/* PC */
 document.addEventListener("keydown",e=>{
   if(["ArrowLeft","ArrowRight","a","d"].includes(e.key.toLowerCase())){
     goHome();
   }
 });
 
+/* GO HOME (con version) */
 function goHome(){
   phone.style.transform="translateX(100%)";
   phone.style.opacity="0";
 
   setTimeout(()=>{
-    window.location.href="home.html";
+    window.location.href="home.html?v="+VERSION;
   },250);
 }
+
+/* BLOQUEOS */
+
+/* click derecho */
+document.addEventListener("contextmenu",e=>e.preventDefault());
+
+/* F12 + inspect */
+document.addEventListener("keydown",e=>{
+  if(
+    e.key==="F12" ||
+    (e.ctrlKey && e.shiftKey && ["I","J","C"].includes(e.key)) ||
+    (e.ctrlKey && e.key==="U")
+  ){
+    e.preventDefault();
+    return false;
+  }
+});
 </script>
 
 </body>
